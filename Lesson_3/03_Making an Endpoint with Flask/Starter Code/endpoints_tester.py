@@ -40,5 +40,3 @@ except Exception as err:
 else:
 	print "Test 2 PASS: Succesfully Made GET Request to /puppies/id"
 	print "ALL TESTS PASSED!!"
-
-
