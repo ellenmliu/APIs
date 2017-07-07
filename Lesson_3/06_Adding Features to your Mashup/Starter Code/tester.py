@@ -1,4 +1,3 @@
-
 import httplib2
 import sys
 import json
@@ -131,4 +130,3 @@ except Exception as err:
 else:
 	print "Test 5 PASS: Succesfully updated first restaurant"
 	print "ALL TESTS PASSED!"
-

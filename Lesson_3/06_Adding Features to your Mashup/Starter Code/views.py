@@ -11,8 +11,6 @@ sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
 
-
-
 #foursquare_client_id = ''
 
 #foursquare_client_secret = ''
@@ -75,6 +73,3 @@ def restaurant_handler(id):
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
-
-
-  
