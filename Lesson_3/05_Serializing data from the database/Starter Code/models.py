@@ -12,6 +12,15 @@ class Puppy(Base):
     id = Column(Integer, primary_key = True)
     description = Column(String(250))
     #Add add a decorator property to serialize data from the database
+    @property
+    def serialize(self):
+       """Return object data in easily serializeable format"""
+       return {
+           'name'         : self.name,
+           'id'           : self.id,
+           'description'  : self.description
+       }
+ 
 
 
 
