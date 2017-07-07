@@ -103,5 +103,3 @@ except Exception as err:
 else:
 	print "Test 5 PASS: Succesfully Made DELETE Request to /puppies/id"
 	print "ALL TESTS PASSED!!"
-
-
