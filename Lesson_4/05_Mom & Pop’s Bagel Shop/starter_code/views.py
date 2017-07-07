@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request, url_for, abort, g
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
-from flask.ext.httpauth import HTTPBasicAuth
+from flask_httpauth import HTTPBasicAuth
 
 auth = HTTPBasicAuth() 
 
@@ -15,14 +15,35 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
 
-#ADD @auth.verify_password here
+@auth.verify_password
+def verify_password(username, password):
+  user = session.query(User).filter_by(username = username).first()
+  # Return false if the username doesn't exists or if the password and username doesn't match
+  if not user or not user.verify_password(password):
+    return False
+  g.user = user
+  return True
 
-#ADD a /users route here
-
+@app.route('/users', methods = ['POST'])
+def new_user():
+  username = request.json.get('username')
+  password = request.json.get('password')
+  # Aborts if one field is missing
+  if username is None or password is None:
+    abort(400)
+  # Checks if the username already exists
+  if session.query(User).filter_by(username = username).first() is not None:
+    abort(400)
+  user = User(username = username)
+  user.hash_password(password)
+  session.add(user)
+  session.commit()
+  return jsonify({'username':user.username}), 201
 
 
 @app.route('/bagels', methods = ['GET','POST'])
-#protect this route with a required login
+# Protect route with a required login
+@auth.login_required
 def showAllBagels():
     if request.method == 'GET':
         bagels = session.query(Bagel).all()

@@ -5,7 +5,20 @@ from sqlalchemy import create_engine
 from passlib.apps import custom_app_context as pwd_context
 Base = declarative_base()
 
-#ADD YOUR USER MODEL HERE
+#USER MODEL
+class User(Base):
+  __tablename__ = 'user'
+  id = Column(Integer, primary_key=True)
+  username = Column(String(32), index=True)
+  password_hash = Column(String(64))
+
+  # Takes a plain password and stores a hash version
+  def hash_password(self, password):
+    self.password_hash = pwd_context.encrypt(password)
+
+  # Takes a plain password and verifies the password
+  def verify_password(self, password):
+    return pwd_context.verify(password, self.password_hash)
 
 class Bagel(Base):
 	__tablename__ = 'bagel'
@@ -29,4 +42,3 @@ engine = create_engine('sqlite:///bagelShop.db')
  
 
 Base.metadata.create_all(engine)
-    

@@ -16,8 +16,8 @@ try:
 	
 	url = address + '/users'
  	h = Http()
-	#h.add_credentials('TinnyTim', 'Udacity')
- 	data = dict(username = "TinnyTim", password = "Udacity")
+	h.add_credentials('Tinny', 'Udacity')
+ 	data = dict(username = "Tinny", password = "Udacity")
  	data = json.dumps(data)
  	resp, content = h.request(url,'POST', body = data, headers = {"Content-Type": "application/json"})
 	if resp['status'] != '201' and resp['status'] != '200':
@@ -32,9 +32,9 @@ else:
 #TEST 2 ADD NEW BAGELS TO THE DATABASE
 try:
 	h = Http() 
-	h.add_credentials('TinnyTim','Udacity')
+	h.add_credentials('Tinny','Udacity')
 	url = address + '/bagels'
-	data = dict(username = "TinnyTim", password = "Udacity", name = "plain", picture = "http://bonacbagel.weebly.com/uploads/4/0/5/4/40548977/s318635836612132814_p1_i1_w240.jpeg", description = "Old-Fashioned Plain Bagel", price= "$1.99")
+	data = dict(username = "Tinny", password = "Udacity", name = "plain", picture = "http://bonacbagel.weebly.com/uploads/4/0/5/4/40548977/s318635836612132814_p1_i1_w240.jpeg", description = "Old-Fashioned Plain Bagel", price= "$1.99")
 	resp, content = h.request(url,'POST', body = json.dumps(data), headers = {"Content-Type" : "application/json"})
 	if resp['status'] != '200':
 		raise Exception('Received an unsuccessful status code of %s' % resp['status'])
@@ -49,7 +49,7 @@ else:
 #TEST 3 TRY TO READ BAGELS WITH INVALID CREDENTIALS
 try:
 	h = Http()
-	h.add_credentials('TinnyTim','Youdacity')
+	h.add_credentials('Tinny','Youdacity')
 	url = address + '/bagels'
 	data = dict(username = "Tinny_Tim", password = "youdacity")
 	resp, content = h.request(url,'GET', urlencode(data))
@@ -66,9 +66,9 @@ else:
 #TEST 4 TRY TO READ BAGELS WITH VALID CREDENTIALS
 try:
 	h = Http()
-	h.add_credentials("TinnyTim", "Udacity")
+	h.add_credentials("Tinny", "Udacity")
 	url = address + '/bagels'
-	#data = dict(username = "TinnyTim", password = "Udacity")
+	data = dict(username = "TinnyTim", password = "Udacity")
 	resp, content = h.request(url,'GET')#, urlencode(data))
 	if resp['status'] != '200':
 		raise Exception("Unable to access /bagels with valid credentials")
