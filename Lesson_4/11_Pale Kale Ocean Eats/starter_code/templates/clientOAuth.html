@@ -11,7 +11,7 @@
 <script>
     gapi.load('auth2', function() {
       auth2 = gapi.auth2.init({
-        client_id: '950296359546-tr6a0qci8smluvackvmj51bruuu73qos.apps.googleusercontent.com',
+        client_id: '770581756882-ibpad8mqg7ap74uggiq3mbhnb8onkdta.apps.googleusercontent.com',
         // Scopes to request in addition to 'profile' and 'email'
         //scope: 'additional_scope'
       });
@@ -54,16 +54,16 @@
 <!--NEW GOOGLE SIGN IN BUTTON -->
 <h2>There's a new Google Sign-In Option!!</h2>
 
- 
-  
+
+
 <button  class="g-signin2" id="signinButton">Sign in with Google</button>
 <!-- Add where you want your sign-in button to render -->
 <!-- Use an image that follows the branding guidelines in a real app -->
 
 <script>
   $('#signinButton').click(function() {
-    
-        
+
+
     auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
 
   });
@@ -141,5 +141,3 @@ function signInCallback(json) {
 
 
   </body>
-
-
